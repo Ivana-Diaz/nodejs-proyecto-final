@@ -11,6 +11,16 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "API REST",
+    endpoints: {
+      products: '/api/products',
+      auth: '/auth/login'
+    }
+  })
+})
+
 app.use("/auth", authRouter);
 app.use("/api", productsRouter);
 

@@ -17,8 +17,8 @@ export const getProductById = async (req, res) => {
 }
 
 export const createProduct = async (req, res) => {
-  const { name, price, category, description } = req.body;
-  const newProduct = await createProductService({ name, price, category, description });
+  const product = req.body;
+  const newProduct = await createProductService(product);
   res.status(201).json(newProduct);
 }
 
