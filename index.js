@@ -25,7 +25,7 @@ app.use("/auth", authRouter);
 app.use("/api", productsRouter);
 
 app.use((req, res, next) => { 
-  res.status(404).send("Recurso no encontrado o ruta inválida");
+  res.status(404).json({ message: "Recurso no encontrado o ruta inválida." });
 })
 
 app.listen(port, () => {

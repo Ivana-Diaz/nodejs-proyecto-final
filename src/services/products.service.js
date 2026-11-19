@@ -9,8 +9,7 @@ export const getProductByIdService = async (id) => {
 }
 
 export const createProductService = async (productData) => {
-  const { name, price, category, description } = productData;
-  return await createProduct({ name, price, category, description });
+  return await createProduct(productData);
 }
 
 export const deleteProductService = async (id) => { 

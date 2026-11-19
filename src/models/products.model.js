@@ -15,12 +15,12 @@ export const getAllProducts = async (category) => {
     }
 
     const snapshot = await getDocs(queryRef);
-    const productsFormat = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    const productsFormat = snapshot.docs?.map(doc => ({ id: doc.id, ...doc.data() }));
 
     return productsFormat;
 
   } catch (err) {
-    console.error("Error al filtrar productos: ", err);
+    console.error("Error al traer productos: ", err);
     throw err;
   }
 }
@@ -47,7 +47,8 @@ export const getProductById = async (id) => {
 // Crear y guardar un producto en Firestore
 export const createProduct = async (product) => {
   try {
-    await addDoc(productsCollection, product);
+    const docRef = await addDoc(productsCollection, product);
+    return { id: docRef.id, ...product };
   } catch (err) {
     console.error("Error al crear el producto: ", err);
     throw err;
@@ -58,6 +59,7 @@ export const createProduct = async (product) => {
 export const deleteProduct = async (id) => {
   try {
     await deleteDoc(doc(productsCollection, id)); 
+    return id;
   } catch (err) {
     console.error("Error al eliminar el producto: ", err);
     throw err;
